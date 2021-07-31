@@ -84,7 +84,7 @@ namespace PvZBattleSystem
                 yield return null;
                 transform.Translate(new Vector3(_xOffset, -0.05f, 0));
             }
-
+            yield return DeadTimerCO();
 
         }
         #endregion
