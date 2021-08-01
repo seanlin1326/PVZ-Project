@@ -5,7 +5,7 @@ namespace PvZBattleSystem
 {
     public class SunFlower : MonoBehaviour
     {
-        [SerializeField] private GameObject sunPrefab;
+       private GameObject sunPrefab;
         // Start is called before the first frame update
         void Start()
         {

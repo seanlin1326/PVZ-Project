@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9105c6aed391dec40be82e4aefc9f09e, type: 3}
+  m_Name: sunFlower
+  m_EditorClassIdentifier: 
+  plantName: sunFlower
+  plantSprite: {fileID: 21300000, guid: b85d6de83d40d044dbbb7fcd29560c9a, type: 3}
+  plantObj: {fileID: 0}
+  translucentPlantObj: {fileID: 0}
+  plantDescription: "\u88FD\u9020\u592A\u967D\u7684\u529F\u81E3"

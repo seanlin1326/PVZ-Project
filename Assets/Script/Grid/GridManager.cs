@@ -5,6 +5,16 @@ namespace PvZBattleSystem
 {
     public class GridManager : MonoBehaviour
     {
+        public static GridManager instance;
+        private void Awake()
+        {
+            if(instance != null)
+            {
+                Destroy(this);
+                return;
+            }
+            instance = this;
+        }
         private List<Vector2> pointList = new List<Vector2>();
         private List<Grid> gridList = new List<Grid>();
         // Start is called before the first frame update
@@ -18,7 +28,7 @@ namespace PvZBattleSystem
         {
             if (Input.GetMouseButtonDown(0))
             {
-                GetGridPointByMouse();
+                //GetGridPointByMouse();
             }
         }
         //創建碰撞體的形式創建網格
