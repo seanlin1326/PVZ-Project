@@ -79,19 +79,22 @@ namespace PvZBattleSystem
         //通過鼠標獲取網格座標點
         public Vector2 GetGridPointByMouse()
         {
+            return GetGridPointByWorldPos(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+        }
+        public Vector2 GetGridPointByWorldPos(Vector2 _worldPos)
+        {
             float _dis = 1000000;
             Vector2 _selectedGridPos = Vector2.zero;
             for (int i = 0; i < gridList.Count; i++)
             {
-                if (Vector2.Distance(Camera.main.ScreenToWorldPoint(Input.mousePosition), gridList[i].position) < _dis)
+                if (Vector2.Distance(_worldPos, gridList[i].position) < _dis)
                 {
-                    _dis = Vector2.Distance(Camera.main.ScreenToWorldPoint(Input.mousePosition), gridList[i].position);
+                    _dis = Vector2.Distance(_worldPos, gridList[i].position);
                     _selectedGridPos = gridList[i].position;
                 }
             }
             Debug.Log(_selectedGridPos);
             return _selectedGridPos;
-
         }
     }
 }

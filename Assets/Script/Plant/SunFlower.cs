@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace PvZBattleSystem
 {
-    public class SunFlower : MonoBehaviour
+    public class SunFlower : PlantBase
     {
        private GameObject sunPrefab;
+        //每次創造陽光之間的間隔
+        [SerializeField] private float createSunFrequency=3f;
         // Start is called before the first frame update
         void Start()
         {
         sunPrefab = Resources.Load<GameObject>("Prefab/GameObj/Sun");
-            InvokeRepeating(nameof(CreateSun), 3, 3);
+            InvokeRepeating(nameof(CreateSun), 3, createSunFrequency);
         }
 
         // Update is called once per frame

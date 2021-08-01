@@ -114,3 +114,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae12f6e644e2a104285fc11a15a2f03c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  createSunFrequency: 5

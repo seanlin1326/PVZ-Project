@@ -14,22 +14,21 @@ namespace PvZBattleSystem
         public float CDTime;
         //當前冷卻計時 用於冷卻時間的計算
         public float currentCDTimer;
-        //是否可以放置植物
-        private bool canPlace;
-        //是否需要放置植物
-        private bool wantPlant;
+        //當前植物是否處於cd中
+        private bool inCD;
+        
         //用來創建的植物
         private GameObject plant;
         //提示當前放置地點的透明植物
         private GameObject plantInGrid;
-        public bool CanPlace
+        public bool InCD
         {
-            get => canPlace;
+            get => inCD;
             set
             {
-                canPlace = value;
+                inCD = value;
                 //如果不能放置
-                if (!canPlace)
+                if (!inCD)
                 {
                     //完全遮罩來表示不可以種植
                     maskImg.fillAmount = 1;
@@ -42,15 +41,11 @@ namespace PvZBattleSystem
                 }
             }
         }
-        public bool WantPlant
-        {
-            get => wantPlant;
-            set { }
-        }
+      
         // Start is called before the first frame update
         void Start()
         {
-            CanPlace = false;
+            InCD = false;
         }
 
         // Update is called once per frame
@@ -62,7 +57,7 @@ namespace PvZBattleSystem
         //鼠標點擊的效果放置植物
         public void OnPointerClick(PointerEventData eventData)
         {
-            if (!CanPlace)
+            if (!InCD)
                 return;
             Debug.Log("放置植物");
             PlantManager.instance.PickANewPlantCard(this);
@@ -70,7 +65,7 @@ namespace PvZBattleSystem
         //鼠標移入卡片區域
         public void OnPointerEnter(PointerEventData eventData)
         {
-            if (!CanPlace)
+            if (!InCD)
                 return;
             transform.localScale = new Vector2(1.05f, 1.05f);
         }
@@ -101,7 +96,7 @@ namespace PvZBattleSystem
             }
             //冷卻結束
             maskImg.fillAmount = 0;
-            CanPlace = true;
+            InCD = true;
         }
 
         

@@ -8,9 +8,9 @@ namespace PvZBattleSystem
     {
         public string plantName;
         public Sprite plantSprite;
-        public GameObject plantObj;
+        public GameObject plantPrefab;
         //用於提示種植植物時，放在哪個格子，以半透明表示
-        public GameObject translucentPlantObj;
+        public GameObject plantPlacePreviewPrefab;
         [TextArea]
         public string plantDescription;
 

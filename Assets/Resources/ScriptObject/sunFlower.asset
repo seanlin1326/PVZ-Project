@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   plantName: sunFlower
   plantSprite: {fileID: 21300000, guid: b85d6de83d40d044dbbb7fcd29560c9a, type: 3}
-  plantObj: {fileID: 0}
-  translucentPlantObj: {fileID: 0}
+  plantPrefab: {fileID: 4453327107885763729, guid: d0cffc9f3789ada45b598131ff682147,
+    type: 3}
+  plantPlacePreviewPrefab: {fileID: 41457469104631436, guid: 1f0dbabaaa8b92e458225d3c191b16c4,
+    type: 3}
   plantDescription: "\u88FD\u9020\u592A\u967D\u7684\u529F\u81E3"
