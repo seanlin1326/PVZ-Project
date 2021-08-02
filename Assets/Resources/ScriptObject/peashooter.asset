@@ -23,3 +23,5 @@ MonoBehaviour:
     type: 3}
   plantDescription: 
   plantCD: 5
+  allOccupyPoint:
+  - {x: 0, y: 0}

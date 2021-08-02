@@ -16,5 +16,6 @@ namespace PvZBattleSystem
         [TextArea]
         public string plantDescription;
         public float plantCD;
+        public List<Vector2Int> allOccupyPoint;
     }
 }

@@ -9,14 +9,15 @@ namespace PvZBattleSystem
         public static PlantManager instance;
         [SerializeField] Transform allPlantContaier;
        [SerializeField] private  PlantUICard currentPlantedCard;
+
         public bool planting;
 
         
       
        GameObject followMousePlantPreviewObj;
-
-       
-        GameObject plantPlacePreviewObj;
+       GameObject plantPlacePreviewObj;
+       [SerializeField] Color previewForbitPlantColor;
+        [SerializeField] Color previewCanPlantColor;
         private void Awake()
         {
             if(instance != null)
@@ -42,26 +43,51 @@ namespace PvZBattleSystem
         {
             if (planting)
             {
-
+                //讓植物preview 跟隨鼠標
                 Vector3 _mousePoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                Grid _selectedGrid = GridManager.instance.GetGridByWorldPos(_mousePoint);
                 followMousePlantPreviewObj.transform.position = new Vector3(_mousePoint.x, _mousePoint.y, 0);
 
 
                 //如果鼠標距離網格比較近，需要在網格上生成一個透明的植物
-                if (Vector2.Distance(_mousePoint, GridManager.instance.GetGridPointByMouse()) < 1.5f)
+                if (Vector2.Distance(_mousePoint, GridManager.instance.GetGridPointByMouse()) < 1f)
                 {
                     if (followMousePlantPreviewObj.activeSelf)
                         followMousePlantPreviewObj.SetActive(false);
+                    //若plantPlacePreviewObj未生成則生成，若已經生成則更改位置
                     if (plantPlacePreviewObj == null)
                         plantPlacePreviewObj = Instantiate(currentPlantedCard.plantData.plantPlacePreviewPrefab, GridManager.instance.GetGridPointByMouse(), Quaternion.identity, PlantManager.instance.transform);
                     else
                         plantPlacePreviewObj.transform.position = GridManager.instance.GetGridPointByMouse();
+                    SpriteRenderer[] _plantPlacePreviewObjSR = plantPlacePreviewObj.GetComponentsInChildren<SpriteRenderer>();
 
-
+                    //若此處可以種植植物(Grid沒有同時種植其他植物 也沒有不能種植的狀態)
+                    if (GridManager.instance.CanPlantJudgeByVector2IntList(_selectedGrid,currentPlantedCard.plantData.allOccupyPoint))
+                    {
+                        foreach (var _sr in _plantPlacePreviewObjSR)
+                        {
+                            _sr.color = previewCanPlantColor;
+                        }
+                    }
+                    else
+                    {
+                        foreach (var _sr in _plantPlacePreviewObjSR)
+                        {
+                            _sr.color = previewForbitPlantColor;
+                        }
+                    }
                     //點擊滑鼠左鍵 以種植植物
                     if (Input.GetMouseButtonDown(0))
                     {
-                        Plant();
+                        bool _judge = GridManager.instance.CanPlantJudgeByVector2IntList(_selectedGrid, currentPlantedCard.plantData.allOccupyPoint);
+                        if (_judge)
+                        {
+                            Debug.Log("可以種");
+                        }
+                        else
+                            Debug.Log("不能種");
+                        Plant(_selectedGrid);
+                        
                         EndPlant();
                     }  
                 }
@@ -95,11 +121,21 @@ namespace PvZBattleSystem
            
         }
         //種植行為
-   public void Plant()
+   public void Plant(Grid _selectedGrid)
         {
 
-            Instantiate(currentPlantedCard.plantData.plantPrefab, GridManager.instance.GetGridPointByMouse(), Quaternion.identity, allPlantContaier);
+            List<Grid> _allGridNeedPlant = GridManager.instance.AllNeedGridsToPlant(_selectedGrid,currentPlantedCard.plantData.allOccupyPoint);
+            if (_allGridNeedPlant==null)
+            {
+                Debug.Log("當前格不能種歐");
+                return;
+            }
+           GameObject _plantedPlant=  Instantiate(currentPlantedCard.plantData.plantPrefab, GridManager.instance.GetGridPointByMouse(), Quaternion.identity, allPlantContaier);
             currentPlantedCard.InCD = false;
+            foreach (var _grid in _allGridNeedPlant)
+            {
+                _grid.PlantOnThisGrid(_plantedPlant);
+            }
         }
         //結束種植
     public void EndPlant()
@@ -111,6 +147,7 @@ namespace PvZBattleSystem
             planting = false;
 
         }
+      
         public void DestoryFollowMousePlantPreview()
         {
             if (followMousePlantPreviewObj != null)
