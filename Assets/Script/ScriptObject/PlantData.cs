@@ -8,11 +8,13 @@ namespace PvZBattleSystem
     {
         public string plantName;
         public Sprite plantSprite;
+        public Sprite plantCardSprite;
         public GameObject plantPrefab;
+        public GameObject plantFollowMousePreviewPrefab;
         //用於提示種植植物時，放在哪個格子，以半透明表示
         public GameObject plantPlacePreviewPrefab;
         [TextArea]
         public string plantDescription;
-
+        public float plantCD;
     }
 }

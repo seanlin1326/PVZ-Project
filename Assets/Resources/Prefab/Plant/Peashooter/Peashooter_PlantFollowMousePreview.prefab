@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 963633430858801102}
   - component: {fileID: 7981743682118629900}
   m_Layer: 0
-  m_Name: PlantFollowMousePreview
+  m_Name: Peashooter_PlantFollowMousePreview
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -70,7 +70,7 @@ SpriteRenderer:
   m_SortingLayerID: -1877134137
   m_SortingLayer: 3
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: b8d1d93fa0401f2459e6fd820b400044, type: 3}
+  m_Sprite: {fileID: 21300000, guid: aa021e6b64b7faf489254aec8fab3651, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

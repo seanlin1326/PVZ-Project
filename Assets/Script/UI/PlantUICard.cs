@@ -10,13 +10,14 @@ namespace PvZBattleSystem
         public PlantData plantData;
         //遮罩圖片的img組件
         [SerializeField]private Image maskImg;
+        [SerializeField] private Image cardSprite;
         //冷卻時間 幾秒可以放一次植物
         public float CDTime;
         //當前冷卻計時 用於冷卻時間的計算
         public float currentCDTimer;
         //當前植物是否處於cd中
         private bool inCD;
-        
+      
         //用來創建的植物
         private GameObject plant;
         //提示當前放置地點的透明植物
@@ -45,13 +46,19 @@ namespace PvZBattleSystem
         // Start is called before the first frame update
         void Start()
         {
-            InCD = false;
+            InCD = true;
+            Initial();
         }
 
         // Update is called once per frame
         void Update()
         {
            
+        }
+        void Initial()
+        {
+            CDTime = plantData.plantCD;
+            cardSprite.sprite = plantData.plantCardSprite;
         }
         #region -- 鼠標與卡片互動代碼 --
         //鼠標點擊的效果放置植物

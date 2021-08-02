@@ -86,7 +86,7 @@ GameObject:
   - component: {fileID: 7835765986520331221}
   - component: {fileID: 7835765986520331223}
   m_Layer: 5
-  m_Name: Card
+  m_Name: PlantCard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -163,6 +163,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   plantData: {fileID: 11400000, guid: a10096f2216852d4fab5161d0ed0dedd, type: 2}
   maskImg: {fileID: 7835765986228907091}
+  cardSprite: {fileID: 7835765986520331221}
   CDTime: 3
   currentCDTimer: 0
 --- !u!1 &7835765986918521638

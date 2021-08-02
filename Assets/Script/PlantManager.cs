@@ -12,7 +12,7 @@ namespace PvZBattleSystem
         public bool planting;
 
         
-       [SerializeField] GameObject followMousePlantPreviewPrefab;
+      
        GameObject followMousePlantPreviewObj;
 
        
@@ -91,8 +91,8 @@ namespace PvZBattleSystem
             currentPlantedCard = _plantCard;
             DestoryFollowMousePlantPreview();
             DestroyPlantPlacePreview();
-            followMousePlantPreviewObj = Instantiate(followMousePlantPreviewPrefab,transform);
-            followMousePlantPreviewObj.GetComponent<SpriteRenderer>().sprite = _plantCard.plantData.plantSprite;
+            followMousePlantPreviewObj = Instantiate(currentPlantedCard.plantData.plantFollowMousePreviewPrefab,transform);
+           
         }
         //種植行為
    public void Plant()
