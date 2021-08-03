@@ -124,15 +124,18 @@ namespace PvZBattleSystem
    public void Plant(Grid _selectedGrid)
         {
 
-            List<Grid> _allGridNeedPlant = GridManager.instance.AllNeedGridsToPlant(_selectedGrid,currentPlantedCard.plantData.allOccupyPoint);
-            if (_allGridNeedPlant==null)
+            List<Grid> _allNeedPlantGrids = GridManager.instance.AllNeedGridsToPlant(_selectedGrid,currentPlantedCard.plantData.allOccupyPoint);
+            if (_allNeedPlantGrids==null)
             {
                 Debug.Log("當前格不能種歐");
                 return;
             }
            GameObject _plantedPlant=  Instantiate(currentPlantedCard.plantData.plantPrefab, GridManager.instance.GetGridPointByMouse(), Quaternion.identity, allPlantContaier);
+            PlantBase _plantScript = _plantedPlant.GetComponent<PlantBase>();
+            _plantScript.AsignAllOccupyGrids(_allNeedPlantGrids);
+          
             currentPlantedCard.InCD = false;
-            foreach (var _grid in _allGridNeedPlant)
+            foreach (var _grid in _allNeedPlantGrids)
             {
                 _grid.PlantOnThisGrid(_plantedPlant);
             }

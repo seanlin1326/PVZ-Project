@@ -5,25 +5,25 @@ namespace PvZBattleSystem
 {
     public class Grid : MonoBehaviour
     {
-        public Grid(Vector2Int point, Vector2 position, bool havePlant)
+        public Grid(Vector2Int _point, Vector2 _position, bool _plantOccupying)
         {
-            this.point = point;
-            this.position = position;
-            this.havePlant = havePlant;
+            coordinate = _point;
+            position = _position;
+            PlantOccupying = _plantOccupying;
         }
         //座標點 (0,1) (1,1)
-        public Vector2Int point;
+        public Vector2Int coordinate;
 
         //世界座標
         public Vector2 position;
 
         //是否有植物佔據這個格子
-        public bool havePlant;
+        public bool PlantOccupying;
         public bool CanPlant
         {
             get
             {
-                return !havePlant;
+                return !PlantOccupying;
             }
         }
         public GameObject occupyingPlantObj;
@@ -35,7 +35,7 @@ namespace PvZBattleSystem
                 return;
             }
             occupyingPlantObj = _plantedPlant;
-            havePlant = true;
+            PlantOccupying = true;
         }
       
     }

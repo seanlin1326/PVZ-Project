@@ -14,15 +14,17 @@ namespace PvZBattleSystem
                 return;
             }
             instance = this;
+            CreateGridScriptBaseList();
         }
         public int gridheight=5;
         public int gridwidth=9;
         private List<Vector2> pointList = new List<Vector2>();
         private List<Grid> gridList = new List<Grid>();
+        
         // Start is called before the first frame update
         void Start()
         {
-            CreateGridScriptBaseList();
+           
         }
 
         // Update is called once per frame
@@ -32,7 +34,11 @@ namespace PvZBattleSystem
             {
                 //GetGridPointByMouse();
             }
-        } 
+        }
+        #region -- Property --
+        public int Gridheight { get { return gridheight; } }
+        public int Gridwidth  { get { return gridwidth; } }
+        #endregion
         #region -- 創建相關 --
         //創建碰撞體的形式創建網格
         private void CreateGridsBaseColl()
@@ -85,9 +91,9 @@ namespace PvZBattleSystem
         //通過鼠標獲取網格座標點
         public Vector2 GetGridPointByMouse()
         {
-            return GetGridPointByWorldPos(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+            return GetGridPosByWorldPos(Camera.main.ScreenToWorldPoint(Input.mousePosition));
         }
-        public Vector2 GetGridPointByWorldPos(Vector2 _worldPos)
+        public Vector2 GetGridPosByWorldPos(Vector2 _worldPos)
         {
             return GetGridByWorldPos(_worldPos).position;
         }
@@ -107,16 +113,27 @@ namespace PvZBattleSystem
             //Debug.Log(_selectedGrid.point);
             return _selectedGrid;
         }
+
+        public Grid GetGridByVector2IntCoordinate(int _xCoordinate, int _yCoordinate)
+        {
+            foreach (var _grid in gridList)
+            {
+                if(_grid.coordinate == new Vector2Int(_xCoordinate, _yCoordinate))
+                {
+                    return _grid;
+                }
+            }
+            Debug.Log("回傳空值");
+            return null;
+        }
         #endregion
         #region -- 植物種植相關 --
         //判斷當前的格子能不能種植植物 利用種植該植物需要格子來判斷
         public bool CanPlantJudgeByVector2IntList(Grid _selectedGrid, List<Vector2Int> _allNeedGridVectorIntList)
         {
-            Vector2Int _selectedGridPoint = _selectedGrid.point;
+            Vector2Int _selectedGridPoint = _selectedGrid.coordinate;
             List<Grid> _allNeedGrid=new List<Grid>();
-            //若_selectedGrid 不包含在gridList return false
-            if (!gridList.Contains(_selectedGrid))
-                return false;
+           
             //將所有判斷需要的Grid，加入_allNeedGrid中
             foreach (var _vector2Int in _allNeedGridVectorIntList)
             {
@@ -127,9 +144,13 @@ namespace PvZBattleSystem
                 foreach (var _grid in gridList)
                 {
                    
-                    if (_grid.point== _needGridVector2Int)
+                    if (_grid.coordinate== _needGridVector2Int)
                     {
-
+                        if (AlreadyContainInAGridList(_grid, _allNeedGrid))
+                        {
+                            //Debug.Log("已經存在了");
+                            break;
+                        }
                         _allNeedGrid.Add(_grid);
                     }
                 }
@@ -143,20 +164,17 @@ namespace PvZBattleSystem
         } 
         public List<Grid> AllNeedGridsToPlant(Grid _selectedGrid, List<Vector2Int> _allNeedGridVectorIntList)
         {
-            Vector2Int _selectedGridPoint = _selectedGrid.point;
-            List<Grid> _allNeedGrid = new List<Grid>();
-            //若_selectedGrid 不包含在gridList return false
-            if (!gridList.Contains(_selectedGrid))
-            {
+
           
-                return null;
-            }
+            Vector2Int _selectedGridPoint = _selectedGrid.coordinate;
+            List<Grid> _allNeedGrid = new List<Grid>();
+           
             //將所有判斷需要的Grid，加入_allNeedGrid中
             foreach (var _vector2Int in _allNeedGridVectorIntList)
             {
            
                 Vector2Int _needGridVector2Int = _selectedGridPoint + _vector2Int;
-                Debug.Log(_needGridVector2Int+" ##");
+                //Debug.Log(_needGridVector2Int+" ##");
                 //若需要的格子不合法直接回傳false
                 if (_needGridVector2Int.x < 0 || _needGridVector2Int.x >= gridheight || _needGridVector2Int.y < 0 || _needGridVector2Int.y >= gridwidth)
                 {
@@ -167,8 +185,13 @@ namespace PvZBattleSystem
                 foreach (var _grid in gridList)
                 {
 
-                    if (_grid.point == _needGridVector2Int)
+                    if (_grid.coordinate == _needGridVector2Int)
                     {
+                        if (AlreadyContainInAGridList(_grid,_allNeedGrid))
+                        {
+                            Debug.Log("已經存在了");
+                            break;
+                        }
                         _allNeedGrid.Add(_grid);
                     }
                 }
@@ -183,10 +206,21 @@ namespace PvZBattleSystem
             }
             foreach (var _grid in _allNeedGrid)
             {
-                Debug.Log("haha " +_grid.point);
+                //Debug.Log("haha " +_grid.point);
             }
+            //Debug.Log(_allNeedGrid.Count +"個");
             return _allNeedGrid;
             
+        }
+
+        public bool AlreadyContainInAGridList(Grid _judgeGrid,List<Grid> _gridList)
+        {
+            foreach (var _grid in _gridList)
+            {
+                if (_grid.coordinate == _judgeGrid.coordinate)
+                    return true;
+            }
+            return false;
         }
         #endregion
     }
