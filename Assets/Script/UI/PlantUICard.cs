@@ -10,11 +10,15 @@ namespace PvZBattleSystem
         public PlantData plantData;
         //遮罩圖片的img組件
         [SerializeField]private Image maskImg;
-        [SerializeField] private Image cardSprite;
+        [SerializeField] private Image cardImage;
+        //UI Text組件
+        [SerializeField] private Text sunCostText;
         //冷卻時間 幾秒可以放一次植物
         public float CDTime;
         //當前冷卻計時 用於冷卻時間的計算
         public float currentCDTimer;
+        //這個植物的卡牌消耗
+        public int sunCost;
         //當前植物是否處於cd中
         private bool inCD;
       
@@ -58,7 +62,10 @@ namespace PvZBattleSystem
         void Initial()
         {
             CDTime = plantData.plantCD;
-            cardSprite.sprite = plantData.plantCardSprite;
+            cardImage.sprite = plantData.plantCardSprite;
+            sunCost = plantData.sunCost;
+            sunCostText.text = sunCost.ToString();
+
         }
         #region -- 鼠標與卡片互動代碼 --
         //鼠標點擊的效果放置植物
@@ -66,7 +73,14 @@ namespace PvZBattleSystem
         {
             if (!InCD)
                 return;
-            Debug.Log("放置植物");
+            if(GameManager.instance.SunOwnsNum < sunCost)
+            {
+                UIManager.instance.SunShortageAnimation();
+                Debug.Log("陽光不夠");
+                return;
+            }
+           
+            //Debug.Log("放置植物");
             PlantManager.instance.PickANewPlantCard(this);
         }
         //鼠標移入卡片區域

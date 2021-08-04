@@ -23,5 +23,7 @@ MonoBehaviour:
     type: 3}
   plantDescription: 
   plantCD: 5
+  maxHp: 0
+  sunCost: 100
   allOccupyPoint:
   - {x: 0, y: 0}

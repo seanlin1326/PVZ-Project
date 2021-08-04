@@ -17,6 +17,8 @@ namespace PvZBattleSystem
         public string plantDescription;
         public float plantCD;
         public int maxHp;
+        //種植需要花費的陽光
+        public int sunCost;
         public List<Vector2Int> allOccupyPoint;
     }
 }

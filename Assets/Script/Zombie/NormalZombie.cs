@@ -7,6 +7,8 @@ namespace PvZBattleSystem
     {
         public enum BehaviourState { Move , Attack}
         public BehaviourState behaviourState;
+  
+               
         public float attackInterval = 0.8f;
 
         protected override void Start()
@@ -61,7 +63,7 @@ namespace PvZBattleSystem
         }
         IEnumerator AttckPlantCO()
         {
-            bool _breakFlag = false;
+            bool _breakFlag = false;  
             while (!EndAttackStateJudge())
             {
                

@@ -130,7 +130,9 @@ namespace PvZBattleSystem
                 Debug.Log("當前格不能種歐");
                 return;
             }
-           GameObject _plantedPlant=  Instantiate(currentPlantedCard.plantData.plantPrefab, GridManager.instance.GetGridPointByMouse(), Quaternion.identity, allPlantContaier);
+            //花費太陽
+            GameManager.instance.ConsumeOwnsSun(currentPlantedCard.sunCost);
+            GameObject _plantedPlant=  Instantiate(currentPlantedCard.plantData.plantPrefab, GridManager.instance.GetGridPointByMouse(), Quaternion.identity, allPlantContaier);
             PlantBase _plantScript = _plantedPlant.GetComponent<PlantBase>();
             _plantScript.AsignAllOccupyGrids(_allNeedPlantGrids);
           

@@ -27,6 +27,16 @@ namespace PvZBattleSystem
             }
             instance = this;
         }
+        #region -- 有關陽光 --
+       // 消費已經擁有的陽光
+       public void ConsumeOwnsSun(int _consumeSunAmount)
+        {
+            if(sunOwnsNum >= _consumeSunAmount)
+            {
+                SunOwnsNum -= _consumeSunAmount;
+            }
+        }
+        #endregion
         // Start is called before the first frame update
         void Start()
         {
