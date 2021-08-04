@@ -13,6 +13,7 @@ namespace PvZBattleSystem
         {
         sunPrefab = Resources.Load<GameObject>("Prefab/GameObj/Sun");
             InvokeRepeating(nameof(CreateSun), 3, createSunFrequency);
+            Init();
         }
 
         // Update is called once per frame

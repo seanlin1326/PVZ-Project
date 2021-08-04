@@ -9,7 +9,7 @@ namespace PvZBattleSystem
         {
             coordinate = _point;
             position = _position;
-            PlantOccupying = _plantOccupying;
+            plantOccupying = _plantOccupying;
         }
         //座標點 (0,1) (1,1)
         public Vector2Int coordinate;
@@ -18,12 +18,12 @@ namespace PvZBattleSystem
         public Vector2 position;
 
         //是否有植物佔據這個格子
-        public bool PlantOccupying;
+        public bool plantOccupying;
         public bool CanPlant
         {
             get
             {
-                return !PlantOccupying;
+                return !plantOccupying;
             }
         }
         public GameObject occupyingPlantObj;
@@ -35,7 +35,18 @@ namespace PvZBattleSystem
                 return;
             }
             occupyingPlantObj = _plantedPlant;
-            PlantOccupying = true;
+            plantOccupying = true;
+        }
+        public void RemovePlantOnThisGrid()
+        {
+            if (!plantOccupying || occupyingPlantObj==null)
+            {
+                Debug.Log("已經清空了 或有錯誤");
+                return;
+            }
+            occupyingPlantObj = null;
+            plantOccupying = false;
+
         }
       
     }

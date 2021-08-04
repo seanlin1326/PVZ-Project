@@ -95,8 +95,9 @@ namespace PvZBattleSystem
         private void OnMouseDown()
         {
             GameManager.instance.SunOwnsNum += collectSunValue;
-         Vector3 _sunOwnsNumTextPos = Camera.main.ScreenToWorldPoint(UIManager.instance.GetSunOwnsNumTextPos());
-            _sunOwnsNumTextPos = new Vector3(_sunOwnsNumTextPos.x, _sunOwnsNumTextPos.y, 0);
+            //Vector3 _sunOwnsNumTextPos = Camera.main.ScreenToWorldPoint(UIManager.instance.GetSunOwnsNumTextPos());
+            Vector3 _sunOwnsNumTextPos = SunManager.instance.sunCollectedMoveTo.position;
+               _sunOwnsNumTextPos = new Vector3(_sunOwnsNumTextPos.x, _sunOwnsNumTextPos.y, 0);
             FlyAnimation(_sunOwnsNumTextPos);
         }
         private void FlyAnimation(Vector3 _destinationPos)

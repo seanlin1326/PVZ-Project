@@ -8,7 +8,12 @@ namespace PvZBattleSystem
     {
         //當前植物所在的網格組
         protected List<Grid> currentOccupyGrids=new List<Grid>();
+        [SerializeField]protected int hp;
 
+        protected virtual void Init()
+        {
+            hp = 400;
+        }
         public List<Grid> AllOccupyingGrid
         {
             get
@@ -29,6 +34,24 @@ namespace PvZBattleSystem
             {
                 currentOccupyGrids.Add(_grid);
             }
+        }
+        //被殭屍攻擊時 受傷的方法
+        public void Hurt(int _hurtValue) 
+        {
+            Debug.Log("受傷");
+            hp -= _hurtValue;
+            if (hp <= 0)
+            {
+                Dead();
+            }
+        }
+        public void Dead()
+        {
+            foreach (var _grid in currentOccupyGrids)
+            {
+                _grid.RemovePlantOnThisGrid();
+            }
+            Destroy(gameObject);
         }
 
     }

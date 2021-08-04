@@ -3,9 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace PvZBattleSystem
 {
-    public class SunSkyManager : MonoBehaviour
+    public class SunManager : MonoBehaviour
     {
-        [SerializeField] private GameObject sunPrefab;
+
+        public static SunManager instance;
+        private void Awake()
+        {
+            if (instance != null)
+            {
+                Destroy(this);
+                return;
+            }
+            instance = this;
+        }
+         private GameObject sunPrefab;
         //創建陽光時候的座標Y
         [SerializeField] private float spawnSunPosY = 6f;
 
@@ -17,6 +28,7 @@ namespace PvZBattleSystem
         [SerializeField] private float sunDropMinPosY = -3.7f;
         [SerializeField] private float sunDropMaxPosY = 3f;
 
+         public Transform sunCollectedMoveTo;
         // Start is called before the first frame update
         void Start()
         {

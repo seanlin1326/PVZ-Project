@@ -5,6 +5,9 @@ namespace PvZBattleSystem
 {
     public class ThirdPeaShooter_P800 : PlantBase
     {
-       
+        private void Start()
+        {
+            Init();
+        }
     }
 }
