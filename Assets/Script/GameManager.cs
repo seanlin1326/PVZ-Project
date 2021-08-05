@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 namespace PvZBattleSystem
 {
     public class GameManager : MonoBehaviour
@@ -9,11 +10,16 @@ namespace PvZBattleSystem
         //擁有陽光的數量
         private int sunOwnsNum;
 
+        public event Action OnSunOwnsNumChange;
+        public event Action<int> OnSunOwnsNumChangeByInt;
         public int SunOwnsNum { 
             get => sunOwnsNum;
             set {
                 sunOwnsNum = value;
-                UIManager.instance.UpdateSunUIText(sunOwnsNum);
+
+                if (OnSunOwnsNumChangeByInt != null)
+                    OnSunOwnsNumChangeByInt(sunOwnsNum);
+                OnSunOwnsNumChange?.Invoke();
                 } 
         }
 
@@ -27,9 +33,14 @@ namespace PvZBattleSystem
             }
             instance = this;
         }
+        // Start is called before the first frame update
+        void Start()
+        {
+            sunOwnsNum = 0;
+        }
         #region -- 有關陽光 --
-       // 消費已經擁有的陽光
-       public void ConsumeOwnsSun(int _consumeSunAmount)
+        // 消費已經擁有的陽光
+        public void ConsumeOwnsSun(int _consumeSunAmount)
         {
             if(sunOwnsNum >= _consumeSunAmount)
             {
@@ -37,11 +48,7 @@ namespace PvZBattleSystem
             }
         }
         #endregion
-        // Start is called before the first frame update
-        void Start()
-        {
-
-        }
+        
 
         // Update is called once per frame
         void Update()

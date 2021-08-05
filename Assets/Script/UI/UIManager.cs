@@ -23,6 +23,7 @@ namespace PvZBattleSystem
         void Start()
         {
             UpdateSunUIText(GameManager.instance.SunOwnsNum);
+            GameManager.instance.OnSunOwnsNumChangeByInt += UpdateSunUIText;
         }
 
         // Update is called once per frame

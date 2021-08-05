@@ -11,6 +11,8 @@ namespace PvZBattleSystem
         //遮罩圖片的img組件
         [SerializeField]private Image maskImg;
         [SerializeField] private Image cardImage;
+
+        Color SunLackColor;
         //UI Text組件
         [SerializeField] private Text sunCostText;
         //冷卻時間 幾秒可以放一次植物
@@ -46,7 +48,10 @@ namespace PvZBattleSystem
                 }
             }
         }
-      
+        private void Awake()
+        {
+            
+        }
         // Start is called before the first frame update
         void Start()
         {
@@ -65,8 +70,19 @@ namespace PvZBattleSystem
             cardImage.sprite = plantData.plantCardSprite;
             sunCost = plantData.sunCost;
             sunCostText.text = sunCost.ToString();
+            GameManager.instance.OnSunOwnsNumChange += CardImageTextColorChange;
+            CardImageTextColorChange();
 
         }
+        #region -- UI --
+        private void CardImageTextColorChange()
+        {
+            if (GameManager.instance.SunOwnsNum < sunCost)
+                cardImage.color = new Color32(161, 161, 161, 255);
+            else
+                cardImage.color = Color.white;
+        }
+        #endregion
         #region -- 鼠標與卡片互動代碼 --
         //鼠標點擊的效果放置植物
         public void OnPointerClick(PointerEventData eventData)
