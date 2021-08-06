@@ -32,11 +32,12 @@ namespace PvZBattleSystem
                 return;
             }
             instance = this;
+            sunOwnsNum = 200;
         }
         // Start is called before the first frame update
         void Start()
         {
-            sunOwnsNum = 0;
+          
         }
         #region -- 有關陽光 --
         // 消費已經擁有的陽光

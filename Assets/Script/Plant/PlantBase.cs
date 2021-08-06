@@ -12,6 +12,7 @@ namespace PvZBattleSystem
         protected SpriteRenderer[] spriteRenderers;
         //受傷動畫執行中
         bool hurtAnimationBusy;
+        [SerializeField]protected LayerMask enemyLayer;
         protected virtual void Init()
         {
             spriteRenderers = GetComponentsInChildren<SpriteRenderer>();

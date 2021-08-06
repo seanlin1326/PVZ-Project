@@ -41,6 +41,9 @@ namespace PvZBattleSystem
             {
                 Debug.Log("打到殭屍了");
                 rigidbody2D.velocity = Vector2.zero;
+                ZombieBase _zombieScript = collision.gameObject.GetComponent<ZombieBase>();
+                if (_zombieScript != null)
+                    _zombieScript.Hurt(50);
                 Instantiate(bulletHitEffectPrefab, transform.position, Quaternion.identity);
                 BulletDestroy();
             }
