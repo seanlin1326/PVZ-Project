@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 4367569718095786897}
   m_Layer: 8
   m_Name: NormalZombie
-  m_TagString: Untagged
+  m_TagString: Zombie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -109,10 +109,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2871584788798341221}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.15, y: 1.11, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2871584788360532482}
+  - {fileID: 1830958961284898643}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -130,7 +131,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentAttackPlant: {fileID: 0}
   speed: 0.3
+  hp: 0
   behaviourState: 0
+  collider2D: {fileID: 0}
+  deadDropHeadPrefab: {fileID: 8367211524732702318, guid: d45e623970bdaca4d8eb29fd59758f94,
+    type: 3}
+  dropHeadPoint: {fileID: 1830958961284898643}
   attackInterval: 1
 --- !u!95 &2871584788798341241
 Animator:
@@ -227,3 +233,33 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.76562405, y: 1.3488132}
   m_EdgeRadius: 0
+--- !u!1 &6699660017454374738
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1830958961284898643}
+  m_Layer: 8
+  m_Name: DropHeadPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1830958961284898643
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6699660017454374738}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.8, y: 0.117, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2871584788798341242}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

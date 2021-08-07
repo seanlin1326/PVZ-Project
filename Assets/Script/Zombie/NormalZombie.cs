@@ -5,14 +5,16 @@ namespace PvZBattleSystem
 {
     public class NormalZombie : ZombieBase
     {
-        public enum BehaviourState { Move , Attack}
+        public enum BehaviourState { Move , Attack,Dead}
         public BehaviourState behaviourState;
-  
-               
+        public Collider2D collider2D;
+        [SerializeField] private GameObject deadDropHeadPrefab;
+        [SerializeField]private Transform  dropHeadPoint;
         public float attackInterval = 0.8f;
-
+      
         protected override void Start()
         {
+            collider2D = GetComponent<Collider2D>();
             base.Start();
             Init();
            
@@ -30,6 +32,7 @@ namespace PvZBattleSystem
                 Move();
             }
         }
+        #region -- 有關移動 或 走路 --
         public virtual void Move()
         {
             nextGrid = GridManager.instance.GetGridByWorldPos(transform.position);
@@ -57,8 +60,11 @@ namespace PvZBattleSystem
             currentAttackPlant = null;
             animator.SetTrigger("walk");
         }
+        #endregion
+        #region -- 有關攻擊 --
         protected override void StartAttack()
         {
+
             StartCoroutine(AttckPlantCO());
         }
         IEnumerator AttckPlantCO()
@@ -82,11 +88,13 @@ namespace PvZBattleSystem
                     break;
                 currentAttackPlant.GetComponent<PlantBase>().Hurt(100);
             }
+            if(!isDead)
             SwitchToWalkState();
         }
+        #endregion
         private bool EndAttackStateJudge()
         {
-            if (behaviourState != BehaviourState.Attack || currentAttackPlant == null)
+            if (behaviourState != BehaviourState.Attack || currentAttackPlant == null || isDead)
                 return true;
             else
                 return false;
@@ -104,5 +112,23 @@ namespace PvZBattleSystem
                 StartAttack();
             }
         }
+        protected override void Dead()
+        {
+           
+            base.Dead();
+            behaviourState = BehaviourState.Dead;
+            collider2D.enabled = false;
+            Debug.Log("Dead");
+            animator.SetTrigger("dead");
+        }
+        private void DropHead()
+        {
+            Instantiate(deadDropHeadPrefab, dropHeadPoint.position, Quaternion.identity);
+        }
+         public void DestorySelf()
+        {
+            Destroy(gameObject);
+        }
+       
     }
 }

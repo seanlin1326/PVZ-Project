@@ -12,6 +12,7 @@ namespace PvZBattleSystem
         //下個移動目標的格子
         protected Grid nextGrid;
         protected bool hurtAnimationBusy;
+        protected bool isDead;
         public GameObject currentAttackPlant;
         private SpriteRenderer[] spriteRenderers;
         //速度 決定我幾秒走幾格 ex 0.5 為兩秒走完一格
@@ -26,13 +27,14 @@ namespace PvZBattleSystem
         }
         protected virtual void Init()
         {
-            int _spawnInRandomRow = Random.Range(0, GridManager.instance.Gridheight);
-            //currentRow = _spawnInRandomRow;
-            //currentColumn = GridManager.instance.Gridwidth - 1;
-            nextGrid = GridManager.instance.GetGridByVector2IntCoordinate(_spawnInRandomRow, GridManager.instance.Gridwidth - 1);
-            transform.position = nextGrid.position+spawnPointOffset;
+            //int _spawnInRandomRow = Random.Range(0, GridManager.instance.Gridheight);
+            //nextGrid = GridManager.instance.GetGridByVector2IntCoordinate(_spawnInRandomRow, GridManager.instance.Gridwidth - 1);
+            //transform.position = nextGrid.position+spawnPointOffset;
         }
-
+        public void ModifySprigteSortingLayer() 
+        { 
+           
+        }
 
 
         // Update is called once per frame
@@ -89,7 +91,7 @@ namespace PvZBattleSystem
         #region
         protected virtual void Dead()
         {
-            Destroy(gameObject);
+            isDead = true;
         }
         #endregion
         protected virtual void StartAttack()

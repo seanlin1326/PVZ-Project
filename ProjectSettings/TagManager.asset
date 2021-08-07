@@ -55,9 +55,12 @@ TagManager:
   - name: Bullet
     uniqueID: 2907618333
     locked: 0
-  - name: UI
-    uniqueID: 868567211
-    locked: 0
   - name: Sun
     uniqueID: 2099015733
+    locked: 0
+  - name: UpToSun
+    uniqueID: 3359585591
+    locked: 0
+  - name: UI
+    uniqueID: 868567211
     locked: 0

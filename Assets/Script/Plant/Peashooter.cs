@@ -36,14 +36,15 @@ namespace PvZBattleSystem
                 Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
             }
         }
+        
         private bool DetactEnemy()
         {
             float _detactDistance = new Vector2(detectEnemyMaxPosX - detactEnemyStartPoint.position.x, 0).magnitude;
-            Debug.Log(_detactDistance);
+            //Debug.Log(_detactDistance);
             RaycastHit2D _hitInfo = Physics2D.Raycast(firePoint.position,Vector2.right, _detactDistance, enemyLayer);
             if(_hitInfo.collider !=null)
             {
-                Debug.Log("打到了殭屍 " + _hitInfo.collider.gameObject.name);
+                //Debug.Log("打到了殭屍 " + _hitInfo.collider.gameObject.name);
                 Debug.DrawLine(firePoint.position, _hitInfo.point, Color.red);
                 return true;
             }
