@@ -223,5 +223,9 @@ namespace PvZBattleSystem
             return false;
         }
         #endregion
+        #region 剷掉植物相關 --
+       
+       
+        #endregion
     }
 }

@@ -92,6 +92,15 @@ namespace PvZBattleSystem
             }
             Destroy(gameObject);
         }
+        //被剷掉
+        public void BeingShovel()
+        {
+            foreach (var _grid in currentOccupyGrids)
+            {
+                _grid.RemovePlantOnThisGrid();
+            }
+            Destroy(gameObject);
+        }
 
     }
 }

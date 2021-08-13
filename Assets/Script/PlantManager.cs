@@ -10,7 +10,7 @@ namespace PvZBattleSystem
         [SerializeField] Transform allPlantContaier;
        [SerializeField] private  PlantUICard currentPlantedCard;
 
-        public bool planting;
+        //public bool planting;
 
         
       
@@ -41,7 +41,7 @@ namespace PvZBattleSystem
         #region -- 種植相關邏輯 --
         public void HandlePlantInUpdate()
         {
-            if (planting)
+            if (GameManager.instance.GamePlayState==GameManager.GameState.Planting)
             {
                 //讓植物preview 跟隨鼠標
                 Vector3 _mousePoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -89,6 +89,7 @@ namespace PvZBattleSystem
                         Plant(_selectedGrid);
                         
                         EndPlant();
+                        GameManager.instance.SwitchGamePlayState(GameManager.GameState.None);
                     }  
                 }
                 //如果鼠標距離網格比較遠
@@ -106,6 +107,7 @@ namespace PvZBattleSystem
                 if (Input.GetMouseButtonDown(1))
                 {
                     EndPlant();
+                    GameManager.instance.SwitchGamePlayState(GameManager.GameState.None);                    
                 }
             }
         }
@@ -113,7 +115,7 @@ namespace PvZBattleSystem
         //選擇一個新的植物卡片 來種植
     public void PickANewPlantCard(PlantUICard _plantCard)
         {
-            planting = true;
+            GameManager.instance.SwitchGamePlayState(GameManager.GameState.Planting);
             currentPlantedCard = _plantCard;
             DestoryFollowMousePlantPreview();
             DestroyPlantPlacePreview();
@@ -149,7 +151,7 @@ namespace PvZBattleSystem
 
             DestoryFollowMousePlantPreview();
             DestroyPlantPlacePreview();
-            planting = false;
+           
 
         }
       
