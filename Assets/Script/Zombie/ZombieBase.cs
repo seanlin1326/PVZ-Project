@@ -23,7 +23,7 @@ namespace PvZBattleSystem
         {
             animator = GetComponent<Animator>();
             spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
-            hp = 300;
+            hp = 500;
         }
         protected virtual void Init()
         {

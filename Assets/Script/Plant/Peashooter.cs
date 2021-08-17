@@ -17,6 +17,7 @@ namespace PvZBattleSystem
         // Start is called before the first frame update
         void Start()
         {
+           
             Init();
             Physics2D.queriesStartInColliders = false;
             InvokeRepeating(nameof(AttackEnemy), 1.5f, attackInterval);
@@ -53,6 +54,11 @@ namespace PvZBattleSystem
                 Debug.DrawRay(firePoint.position, new Vector2(detectEnemyMaxPosX - firePoint.position.x, 0), Color.green);
                 return false;
             }
+        }
+
+        public override void InitPlantData()
+        {
+            plantData = Resources.Load<PlantData>("ScriptObject/peaShooter");
         }
     }
 }

@@ -10,6 +10,7 @@ namespace PvZBattleSystem
         public Collider2D collider2D;
         [SerializeField] private GameObject deadDropHeadPrefab;
         [SerializeField]private Transform  dropHeadPoint;
+        public int attackDamage = 60;
         public float attackInterval = 0.8f;
       
         protected override void Start()
@@ -86,7 +87,7 @@ namespace PvZBattleSystem
                 }
                 if (_breakFlag)
                     break;
-                currentAttackPlant.GetComponent<PlantBase>().Hurt(100);
+                currentAttackPlant.GetComponent<PlantBase>().Hurt(attackDamage);
             }
             if(!isDead)
             SwitchToWalkState();

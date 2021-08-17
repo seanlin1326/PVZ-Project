@@ -6,8 +6,11 @@ namespace PvZBattleSystem
     //植物基類
     public abstract class PlantBase :MonoBehaviour
     {
+        protected Animator animator;
         //當前植物所在的網格組
         protected List<Grid> currentOccupyGrids=new List<Grid>();
+        protected PlantData plantData;
+        [SerializeField]protected int maxHp;
         [SerializeField]protected int hp;
         protected SpriteRenderer[] spriteRenderers;
         //受傷動畫執行中
@@ -15,9 +18,17 @@ namespace PvZBattleSystem
         [SerializeField]protected LayerMask enemyLayer;
         protected virtual void Init()
         {
+            InitPlantData();
+            animator = GetComponent<Animator>();
             spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
-            hp = 400;
+            maxHp = plantData.maxHp;
+            hp = maxHp;
         }
+        //設定指派 plantData(ScriptObj 資料)
+        public abstract void InitPlantData();
+        
+
+        
         public List<Grid> AllOccupyingGrid
         {
             get
@@ -40,7 +51,7 @@ namespace PvZBattleSystem
             }
         }
         //被殭屍攻擊時 受傷的方法
-        public void Hurt(int _hurtValue) 
+        public virtual void Hurt(int _hurtValue) 
         {
             Debug.Log("受傷");
             hp -= _hurtValue;

@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9105c6aed391dec40be82e4aefc9f09e, type: 3}
+  m_Name: WallNut
+  m_EditorClassIdentifier: 
+  plantName: WallNut
+  plantSprite: {fileID: 21300000, guid: 323472409248fed4bac3fb23193ac3aa, type: 3}
+  plantCardSprite: {fileID: 21300000, guid: 445dcfdef7833f8478ef66842742bee7, type: 3}
+  plantPrefab: {fileID: 5060046105816811448, guid: 47753460cd0efe14a9996014b893a281,
+    type: 3}
+  plantFollowMousePreviewPrefab: {fileID: 41457469104631436, guid: f8d3514d4a77ac84292cb408be7dcac1,
+    type: 3}
+  plantPlacePreviewPrefab: {fileID: 41457469104631436, guid: 6fbe5747060afa6469334324057b86bf,
+    type: 3}
+  plantDescription: 
+  plantCD: 4
+  maxHp: 1800
+  sunCost: 50
+  allOccupyPoint:
+  - {x: 0, y: 0}

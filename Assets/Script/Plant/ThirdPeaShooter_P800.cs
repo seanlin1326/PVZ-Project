@@ -14,6 +14,7 @@ namespace PvZBattleSystem
         public float attackInterval = 1f;
         private void Start()
         {
+          
             Init();
             Physics2D.queriesStartInColliders = false;
             InvokeRepeating(nameof(AttackEnemy), 1.5f, attackInterval);
@@ -58,6 +59,11 @@ namespace PvZBattleSystem
             }
             return false;
           
+        }
+
+        public override void InitPlantData()
+        {
+            plantData = Resources.Load<PlantData>("ScriptObject/ThirdPeaShooter-P800");
         }
     }
 }

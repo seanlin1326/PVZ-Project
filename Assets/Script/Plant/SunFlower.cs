@@ -11,7 +11,8 @@ namespace PvZBattleSystem
         // Start is called before the first frame update
         void Start()
         {
-        sunPrefab = Resources.Load<GameObject>("Prefab/GameObj/Sun");
+            sunPrefab = Resources.Load<GameObject>("Prefab/GameObj/Sun");
+          
             InvokeRepeating(nameof(CreateSun), 3, createSunFrequency);
             Init();
         }
@@ -27,6 +28,11 @@ namespace PvZBattleSystem
             Sun _spawnSunScript = _spawnSunObj.GetComponent<Sun>();
             _spawnSunScript.InitForPlant();
 
+        }
+
+        public override void InitPlantData()
+        {
+            plantData = Resources.Load<PlantData>("ScriptObject/sunFlower");
         }
     }
 }

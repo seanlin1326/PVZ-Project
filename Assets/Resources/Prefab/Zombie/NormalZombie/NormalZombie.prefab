@@ -137,6 +137,7 @@ MonoBehaviour:
   deadDropHeadPrefab: {fileID: 8367211524732702318, guid: d45e623970bdaca4d8eb29fd59758f94,
     type: 3}
   dropHeadPoint: {fileID: 1830958961284898643}
+  attackDamage: 60
   attackInterval: 1
 --- !u!95 &2871584788798341241
 Animator:

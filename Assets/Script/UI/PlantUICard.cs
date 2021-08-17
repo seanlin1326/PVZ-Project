@@ -70,6 +70,7 @@ namespace PvZBattleSystem
             cardImage.sprite = plantData.plantCardSprite;
             sunCost = plantData.sunCost;
             sunCostText.text = sunCost.ToString();
+            maskImg.sprite = plantData.plantCardSprite;
             GameManager.instance.OnSunOwnsNumChange += CardImageTextColorChange;
             CardImageTextColorChange();
 
