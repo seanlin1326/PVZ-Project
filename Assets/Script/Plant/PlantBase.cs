@@ -15,6 +15,8 @@ namespace PvZBattleSystem
         protected SpriteRenderer[] spriteRenderers;
         //受傷動畫執行中
         bool hurtAnimationBusy;
+        //正常僵屍碰到此植物的碰撞體會不會開吃，
+        public bool zombieCanNotEat;
         [SerializeField]protected LayerMask enemyLayer;
         protected virtual void Init()
         {
@@ -23,6 +25,7 @@ namespace PvZBattleSystem
             spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
             maxHp = plantData.maxHp;
             hp = maxHp;
+            zombieCanNotEat = plantData.zombieCanNotEat;
         }
         //設定指派 plantData(ScriptObj 資料)
         public abstract void InitPlantData();

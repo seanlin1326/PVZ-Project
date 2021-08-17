@@ -16,6 +16,7 @@ namespace PvZBattleSystem
         [TextArea]
         public string plantDescription;
         public float plantCD;
+        public bool zombieCanNotEat;
         public int maxHp;
         //種植需要花費的陽光
         public int sunCost;

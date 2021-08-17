@@ -105,6 +105,9 @@ namespace PvZBattleSystem
            
             if (collision.CompareTag("Plant") && collision.gameObject.GetComponent<PlantBase>() !=null && behaviourState==BehaviourState.Move)
             {
+                PlantBase _plantScript = collision.gameObject.GetComponent<PlantBase>();
+                if (_plantScript.zombieCanNotEat)
+                    return;
                 Debug.Log("找到植物");
                 behaviourState = BehaviourState.Attack;
                

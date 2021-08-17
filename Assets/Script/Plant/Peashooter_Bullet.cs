@@ -8,6 +8,7 @@ namespace PvZBattleSystem
         private Rigidbody2D rigidbody2D;
         [SerializeField] private GameObject bulletHitEffectPrefab; 
         [SerializeField] float speed = 300;
+        [SerializeField] int attackDamage = 50;
         //子彈已經不能打人了
         bool bulletNoThreat;
         // Start is called before the first frame update
@@ -43,7 +44,7 @@ namespace PvZBattleSystem
                 rigidbody2D.velocity = Vector2.zero;
                 ZombieBase _zombieScript = collision.gameObject.GetComponent<ZombieBase>();
                 if (_zombieScript != null)
-                    _zombieScript.Hurt(50);
+                    _zombieScript.Hurt(attackDamage);
                 Instantiate(bulletHitEffectPrefab, transform.position, Quaternion.identity);
                 BulletDestroy();
             }
